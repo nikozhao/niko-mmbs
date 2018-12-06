@@ -81,8 +81,8 @@ public class TodayCallBack{
                 //save the stockDay info
                 StockDay stockDay= new StockDay();
                 stockDay.setStockNo(stockNo);
-                stockDay.setMin(StringUtil.cover(stocks[33]));
-                stockDay.setMax(StringUtil.cover(stocks[34]));
+                stockDay.setMin(StringUtil.cover(stocks[34]));
+                stockDay.setMax(StringUtil.cover(stocks[33]));
                 stockDay.setDay(new Timestamp(getToday().getTime()));
                 stockDay.setPe(StringUtil.cover(stocks[39]));
                 stockDay.setPb(StringUtil.cover(stocks[46]));

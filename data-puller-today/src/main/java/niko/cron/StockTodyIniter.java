@@ -55,9 +55,7 @@ public class StockTodyIniter {
             pull(szKey);
             InitParamKey shKey= initParam("sh");
             pull(shKey);
-
         }
-
     }
 
     private void pull(InitParamKey initParamKey) {
