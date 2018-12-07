@@ -8,6 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import niko.cron.StockTodyIniter;
+import niko.util.ApplicationUtil;
+
 /**
  * @Author: Niko Zhao
  * @Date: Create in 15:01 10/26/17

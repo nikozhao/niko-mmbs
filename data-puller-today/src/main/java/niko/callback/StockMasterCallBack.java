@@ -14,15 +14,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import niko.bo.InitParamKey;
 import niko.bo.tx.InitParamKeyBo;
 import niko.dao.entry.Stock;
 import niko.dao.entry.StockDay;
+import niko.dao.entry.StockMaster;
 import niko.dao.entry.StockWorkday;
 import niko.dao.repository.StockDayRepository;
+import niko.dao.repository.StockMasterRepository;
 import niko.dao.repository.StockRepository;
 import niko.dao.repository.StockWorkdayRepository;
-import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 import util.StringUtil;
 
@@ -37,9 +39,9 @@ import util.StringUtil;
  */
 @Component
 @Slf4j
-public class TodayCallBack{
+public class StockMasterCallBack {
     @Autowired
-    StockDayRepository stockDayRepository;
+    StockMasterRepository stockMasterRepository;
     @Autowired
     StockRepository stockRepository;
     @Autowired
@@ -64,7 +66,8 @@ public class TodayCallBack{
                 continue;
             }
             if (!ObjectUtils.isEmpty(stocks) && stocks.length > 0) {
-                String stockNo = stocks[2];
+                String stockNo = stocks[0].replaceAll("sz","")
+                        .replaceAll("sh","").replaceAll("\"","");
                 List<Stock> tmp = stockRepository.findByStockNo(stockNo);
                 //if the stock don't exit.then insert into db
                 if(ObjectUtils.isEmpty(tmp) ){
@@ -74,33 +77,21 @@ public class TodayCallBack{
                     stockRepository.save(stock);
                 }
 
-                List<StockDay> s = stockDayRepository.findByStockNoAndDay(stockNo,getToday());
+                List<StockMaster> s = stockMasterRepository.findByStockNoAndDay(stockNo,getToday());
                 if(!ObjectUtils.isEmpty(s)){
                     continue;
                 }
                 //save the stockDay info
-                StockDay stockDay= new StockDay();
-                stockDay.setStockNo(stockNo);
-                stockDay.setStockName(stocks[1]);
-                stockDay.setMin(StringUtil.cover(stocks[34]));
-                stockDay.setMax(StringUtil.cover(stocks[33]));
-                stockDay.setDay(new Timestamp(getToday().getTime()));
-                stockDay.setPe(StringUtil.cover(stocks[39]));
-                stockDay.setPb(StringUtil.cover(stocks[46]));
-                stockDay.setDealAccount(StringUtil.cover(stocks[37]));
-                stockDay.setTotalAccount(StringUtil.cover(stocks[45]));
-                stockDay.setTotalTradableAccount(StringUtil.cover(stocks[44]));
-                stockDay.setRiseRatio(StringUtil.cover(stocks[32]));
-                //stockDay.setNumberRatio(BigDecimal.ZERO);
-                stockDay.setOutDeal(StringUtil.cover(stocks[7]));
-                stockDay.setInDeal(StringUtil.cover(stocks[8]));
-                stockDay.setYPrice(StringUtil.cover(stocks[4]));
-                stockDay.setTPriceStart(StringUtil.cover(stocks[5]));
-                stockDay.setTPriceEnd(StringUtil.cover(stocks[3]));
-                stockDay.setTPricePre(getPre(stocks[35]));
-                stockDay.setMaxMinPrice(StringUtil.cover(stocks[43]));
-                stockDay.setSellBuyReatio(StringUtil.cover(stocks[38]));
-                stockDayRepository.save(stockDay);
+                StockMaster stockMaster= new StockMaster();
+                stockMaster.setStockNo(stockNo);
+                stockMaster.setBigIn(StringUtil.cover(stocks[1]));
+                stockMaster.setBigOut(StringUtil.cover(stocks[2]));
+                stockMaster.setBig(StringUtil.cover(stocks[3]));
+                stockMaster.setSmallIn(StringUtil.cover(stocks[5]));
+                stockMaster.setSmallOut(StringUtil.cover(stocks[6]));
+                stockMaster.setSmall(StringUtil.cover(stocks[7]));
+                stockMaster.setDay(new Timestamp(getToday().getTime()));
+                stockMasterRepository.save(stockMaster);
             }
             Date date = getToday();
             List<StockWorkday> stockWorkdays= stockWorkdayRepository.findByDay(getToday());

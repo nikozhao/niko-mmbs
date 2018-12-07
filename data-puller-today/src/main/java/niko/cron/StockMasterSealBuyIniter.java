@@ -16,14 +16,15 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import niko.bo.InitParam;
 import niko.bo.InitParamKey;
-
 import niko.bo.tx.InitParamBo;
 import niko.bo.tx.InitParamKeyBo;
+import niko.callback.StockMasterCallBack;
 import niko.callback.TodayCallBack;
+import niko.dao.repository.StockMasterRepository;
+import niko.server.StockService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import niko.server.StockService;
 import util.StockUtil;
 
 /**
@@ -36,14 +37,14 @@ import util.StockUtil;
  * the timer to init the StockDay
  */
 @Configuration
-//@EnableScheduling
+@EnableScheduling
 @Slf4j
-public class StockTodyIniter {
+public class StockMasterSealBuyIniter {
 
     @Autowired
     private StockService stockService;
     @Autowired
-    private TodayCallBack todayCallBack;
+    private StockMasterCallBack stockMasterCallBack;
 
     //time cron
     @Scheduled(cron = "* */2 * * * ?")
@@ -68,6 +69,7 @@ public class StockTodyIniter {
                             sb.append(",");
                         }
                         String stockNo = getStock(initParam);
+                        sb.append("ff_");
                         sb.append(StockUtil.getSinaStockNo(stockNo));
                     });
             OkHttpClient client = new OkHttpClient();
@@ -75,7 +77,7 @@ public class StockTodyIniter {
             boolean flag = true;
             try {
                 Response response = client.newCall(request).execute();
-                flag = todayCallBack.onResponse(response,initParamKey);
+                flag = stockMasterCallBack.onResponse(response,initParamKey);
             } catch (IOException e) {
                 e.printStackTrace();
             }

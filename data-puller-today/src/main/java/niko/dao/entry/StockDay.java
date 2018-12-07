@@ -32,6 +32,8 @@ public class StockDay implements java.io.Serializable {
     private Integer id;
     @Column(name="stock_no")
     private String stockNo;
+    @Column(name="stock_name")
+    private String stockName;
     @Column(name="day")
     private Timestamp day;
     @Column(name="max")
