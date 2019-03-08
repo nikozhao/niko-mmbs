@@ -36,7 +36,7 @@ import util.StockUtil;
  * the timer to init the StockDay
  */
 @Configuration
-//@EnableScheduling
+@EnableScheduling
 @Slf4j
 public class StockTodyIniter {
 
@@ -46,7 +46,7 @@ public class StockTodyIniter {
     private TodayCallBack todayCallBack;
 
     //time cron
-    @Scheduled(cron = "* */2 * * * ?")
+    //@Scheduled(cron = "* */2 * * * ?")
     public void init() {
         Boolean flag = check();
         //flag=true;

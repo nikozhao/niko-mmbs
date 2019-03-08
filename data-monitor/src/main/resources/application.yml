@@ -1,0 +1,33 @@
+spring:
+  session:
+    store-type: none
+  datasource:
+    url: jdbc:mysql://localhost:3306/niko_mmbs?allowMultiQueries=true&autoReconnect=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show: true
+    #show-sql: true
+  mail:
+    host: smtp.qq.com
+    username: 364027009@qq.com
+    password: fniuqalavzskbhjb
+    properties:
+          mail:
+            smtp:
+              ssl:
+                enable: true
+              auth: true
+              starttls:
+                enable: true
+                required: true
+
+server:
+    port: 8010
+dataSource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?allowMultiQueries=true&autoReconnect=true
+    username: root
+    password: root

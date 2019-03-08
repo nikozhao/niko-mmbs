@@ -112,7 +112,17 @@ public class StockMasterCallBack {
         Double pre =Double.parseDouble(strs[2])/Double.parseDouble(strs[1]);
         return BigDecimal.valueOf(pre);
     }
-
+   /* public static void main(String[] args){
+        String context = "v_ff_sz000725=\"sz000725~146314.59~109976.49~36338.10~7.81~318671.89~302517.24~16154.64~3.92~8854800000.00~1385057.44~960563.34~京东方Ａ~20190219~20190218^285045.38^206042.95~20190215^280451.66^153922.39~20190214^438225.16^369494.99~20190213^235020.66^121126.52~687355400.00~1663098200.00~20190219150006\";";
+        String[] strs = context.split("=");
+        int index=0;
+        for (int i = 1; i < strs.length; i++) {
+            String[] stocks = strs[i].split("~");
+            String stockNo = stocks[0].replaceAll("sz","")
+                    .replaceAll("sh","").replaceAll("\"","");
+            System.out.println(stockNo);
+        }
+    }*/
     private Date getToday() {
         Calendar cl = Calendar.getInstance();
         int hour = cl.get(Calendar.HOUR_OF_DAY);

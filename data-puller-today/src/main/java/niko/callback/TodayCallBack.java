@@ -64,7 +64,7 @@ public class TodayCallBack{
                 continue;
             }
             if (!ObjectUtils.isEmpty(stocks) && stocks.length > 0) {
-                String stockNo = stocks[2];
+                String stockNo = stocks[2].replaceAll("\"","");
                 List<Stock> tmp = stockRepository.findByStockNo(stockNo);
                 //if the stock don't exit.then insert into db
                 if(ObjectUtils.isEmpty(tmp) ){

@@ -11,6 +11,7 @@
     <modules>
         <module>data-puller-today</module>
         <module>common</module>
+        <module>data-monitor</module>
     </modules>
 
 
