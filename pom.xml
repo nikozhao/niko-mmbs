@@ -11,7 +11,7 @@
     <modules>
         <module>data-puller-today</module>
         <module>common</module>
-        <module>data-monitor</module>
+        <module>data-deal-account-monitor</module>
     </modules>
 
 

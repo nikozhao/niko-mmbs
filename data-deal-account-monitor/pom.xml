@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>data-monitor</artifactId>
+    <artifactId>data-deal-account-monitor</artifactId>
     <dependencies>
         <dependency>
             <groupId>niko.project</groupId>
