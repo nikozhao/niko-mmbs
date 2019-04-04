@@ -1,5 +1,7 @@
 package niko.ctlr;
 
+import com.alibaba.fastjson.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 import niko.monitor.DealAccountMonitor;
+import niko.monitor.Monitor;
 
 /**
  * @Author: zhaozongqiang
@@ -15,12 +18,24 @@ import niko.monitor.DealAccountMonitor;
 @RestController
 public class StockMonitorController {
     @Autowired
-    private DealAccountMonitor dealAccountMonitor;
+    private Monitor dealAccountMonitor;
+    @Autowired
+    private Monitor peBottomMonitor;
 
-    @RequestMapping("/stock/monitor")
-    public Object test() {
+    @RequestMapping("/stock/monitor/dealAmount")
+    public Object dealAmount() {
         try {
-            dealAccountMonitor.run();
+            dealAccountMonitor.run(null);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping("/stock/monitor/peBottom")
+    public Object peBottom() {
+        try {
+            peBottomMonitor.run(new JSONObject());
             return "success";
         } catch (Exception e) {
             return e.getMessage();

@@ -23,8 +23,8 @@ public interface StockDayRepository extends JpaRepository<StockDay, Integer> {
     @Query("select count(1) from StockDay d where d.stockNo = :stockNo")
     Integer countByStockNo(@Param("stockNo") String stockNo);
 
-    @Query(value = "select * from stock_day d where d.stock_no = :stockNo order by d.day desc limit 5 ",nativeQuery = true)
-    List<StockDay> findLastFiveDataByStockNo(@Param("stockNo") String stockNo);
+    @Query(value = "select * from stock_day d where d.stock_no = :stockNo order by d.day desc limit :lmt ",nativeQuery = true)
+    List<StockDay> findByStockNoAndLimit(@Param("stockNo") String stockNo,@Param("lmt") Integer lmt);
 
     List<StockDay> findByStockNoAndDay(@Param("stockNo") String stockNo, @Param("day") Date day);
 }
