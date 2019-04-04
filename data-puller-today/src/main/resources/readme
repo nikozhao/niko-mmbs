@@ -1,0 +1,13 @@
+select * from stock_day 
+where pe>0 and pe <8
+and day = DATE_FORMAT(date_add(NOW(),interval -0 day),"%Y-%m-%d") 
+and total_account>300 
+and stock_name not like '%银行'
+order by sell_buy_reatio desc, pe ;
+
+
+
+select s.stock_name,m.* from stock_master m left join stock s on m.stock_no = s.stock_no
+where  
+ day = DATE_FORMAT(date_add(NOW(),interval -0 day),"%Y-%m-%d") 
+order by big desc ;

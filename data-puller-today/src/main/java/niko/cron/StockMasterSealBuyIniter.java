@@ -47,7 +47,7 @@ public class StockMasterSealBuyIniter {
     private StockMasterCallBack stockMasterCallBack;
 
     //time cron
-    @Scheduled(cron = "* */2 * * * ?")
+    //@Scheduled(cron = "* */2 * * * ?")
     public void init() {
         Boolean flag = check();
         //flag=true;
@@ -116,5 +116,20 @@ public class StockMasterSealBuyIniter {
             f = true;
         }
         return f;
+    }
+
+
+    public static void main(String[] args){
+        double i =10 ;
+        while (true){
+
+            i=i-i*0.1;
+            System.out.println(i);
+            if(i<5){
+                break;
+            }
+        }
+
+
     }
 }
