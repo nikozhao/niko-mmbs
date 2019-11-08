@@ -46,7 +46,7 @@ public class StockTodyIniter {
     private TodayCallBack todayCallBack;
 
     //time cron
-    //@Scheduled(cron = "* */2 * * * ?")
+    @Scheduled(cron = "* */2 * * * ?")
     public void init() {
         Boolean flag = check();
         //flag=true;
